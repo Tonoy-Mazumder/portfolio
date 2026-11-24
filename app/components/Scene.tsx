@@ -186,17 +186,32 @@ function Placed({ item, mobile }: { item: Item; mobile: boolean }) {
 /* ---------- camera moves down as you scroll ---------- */
 function Rig() {
   const mouse = useRef({ x: 0, y: 0 });
+  const maxScroll = useRef(0);
   useEffect(() => {
+    // cache the scroll range instead of reading scrollHeight every frame
+    const updateMaxScroll = () => {
+      maxScroll.current = Math.max(
+        0,
+        document.documentElement.scrollHeight - window.innerHeight
+      );
+    };
+    updateMaxScroll();
     const onMove = (e: MouseEvent) => {
       mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouse.current.y = (e.clientY / window.innerHeight) * 2 - 1;
     };
     window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
+    window.addEventListener("resize", updateMaxScroll);
+    window.addEventListener("load", updateMaxScroll);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("resize", updateMaxScroll);
+      window.removeEventListener("load", updateMaxScroll);
+    };
   }, []);
 
   useFrame((state) => {
-    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const max = maxScroll.current;
     const p = max > 0 ? window.scrollY / max : 0;
     const cam = state.camera;
     cam.position.x = THREE.MathUtils.lerp(cam.position.x, mouse.current.x * 0.6, 0.05);
