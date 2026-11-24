@@ -1,7 +1,11 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-main);
+}
+
 html { scroll-behavior: smooth; }
-body { background: #0a0a12; color: white; }
+body { background: #0a0a12; color: white; font-family: var(--font-main), sans-serif; }
 
 .glow-text {
   background: linear-gradient(90deg, #a78bfa, #22d3ee, #a78bfa);
