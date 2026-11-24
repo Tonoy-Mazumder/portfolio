@@ -1,29 +1,65 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+
+const SEEN_KEY = "loader-seen";
+
+// tell the photo that the loading screen is finished
+const signalDone = () => {
+  document.documentElement.dataset.loaded = "true";
+  window.dispatchEvent(new Event("loader-done"));
+};
 
 export default function Loader() {
   const [count, setCount] = useState(0);
-  const [show, setShow] = useState(true);
+  // hidden until the effect confirms this is the first visit, so repeat visits never flash it
+  const [show, setShow] = useState(false);
+  const seen = useRef<boolean | null>(null);
+  const progress = useRef(0);
 
   useEffect(() => {
+    let skip = seen.current;
+    if (skip === null) {
+      try {
+        skip = sessionStorage.getItem(SEEN_KEY) === "true";
+      } catch {
+        skip = false;
+      }
+      seen.current = skip;
+      if (!skip) {
+        try {
+          sessionStorage.setItem(SEEN_KEY, "true");
+        } catch {
+          // no sessionStorage: show the loader anyway
+        }
+      }
+    }
+
+    if (skip) {
+      // repeat visit in this session: skip the loader and let the photo start right away
+      signalDone();
+      return;
+    }
+
     document.body.style.overflow = "hidden";
-    let n = 0;
+    setShow(true);
+
+    let n = progress.current;
     let t: ReturnType<typeof setTimeout>;
     const id = setInterval(() => {
-      n = Math.min(100, n + 2 + Math.floor(Math.random() * 4));
+      n = Math.min(100, n + 4 + Math.floor(Math.random() * 4));
+      progress.current = n;
       setCount(n);
       if (n >= 100) {
         clearInterval(id);
         t = setTimeout(() => {
           document.body.style.overflow = "";
-          // tell the photo that the loading screen is finished
-          document.documentElement.dataset.loaded = "true";
-          window.dispatchEvent(new Event("loader-done"));
+          signalDone();
           setShow(false);
-        }, 500);
+        }, 250);
       }
-    }, 50);
+    }, 40);
+
     return () => {
       clearInterval(id);
       clearTimeout(t);
