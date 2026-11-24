@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import Reveal from "./Reveal";
 
@@ -30,28 +31,32 @@ const projects = [
   {
     name: "RentPro",
     desc: "Full-stack equipment rental platform. Customers browse and rent equipment, owners manage listings and requests, and admins manage users and approvals.",
-    tags: ["Role-based dashboards", "Stripe payments", "Google login"],
+    image: "/projects/rentpro.webp",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe", "Better Auth", "shadcn/ui"],
     live: "https://equipment-rental-platform-seven.vercel.app",
     github: "https://github.com/Tonoy-Mazumder/equipment-rental-platform",
   },
   {
     name: "BondhuBondhon",
     desc: "Community event platform for social activities and volunteering. Create, manage and join events, with categories and dark mode.",
-    tags: ["Better Auth", "Event management", "Dark mode"],
+    image: "/projects/bondhubondhon.webp",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Better Auth", "MongoDB", "shadcn/ui"],
     live: "https://bondhu-bondhon.vercel.app",
     github: "https://github.com/Tonoy-Mazumder/bondhu-bondhon",
   },
   {
     name: "Bazar-Dor",
     desc: "Bangla market price tracker showing daily prices of essential goods, price changes, 8 categories and a page for each product.",
-    tags: ["Next.js", "Bangla UI", "Price tracking"],
+    image: "/projects/bazar-dor.webp",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "MongoDB", "shadcn/ui"],
     live: "https://bazar-dor-inky.vercel.app",
     github: "https://github.com/Tonoy-Mazumder/bazar-dor",
   },
   {
     name: "Fit-Log",
     desc: "Modern workout library with 12 exercises. Browse workouts, build your daily plan, save favorites and see time and calorie estimates.",
-    tags: ["Next.js", "Workout plans", "Saved list"],
+    image: "/projects/fit-log.webp",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "MongoDB", "LocalStorage", "shadcn/ui"],
     live: "https://fit-log-fawn.vercel.app",
     github: 'https://github.com/Tonoy-Mazumder/fit-log',
   },
@@ -68,6 +73,14 @@ export function Projects() {
               whileHover={{ y: -8, scale: 1.02 }}
               className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md transition-colors hover:border-violet-500/60 sm:p-6"
             >
+              <Image
+                src={p.image}
+                alt={`Screenshot of the ${p.name} project homepage`}
+                width={1440}
+                height={900}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="mb-4 aspect-video w-full rounded-xl object-cover"
+              />
               <h3 className="text-xl font-semibold">{p.name}</h3>
               <p className="mt-2 flex-1 text-sm leading-relaxed text-white/60">{p.desc}</p>
               <div className="mt-4 flex flex-wrap gap-2">
