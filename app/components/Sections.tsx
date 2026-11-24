@@ -32,7 +32,7 @@ const projects = [
     name: "RentPro",
     desc: "Full-stack equipment rental platform. Customers browse and rent equipment, owners manage listings and requests, and admins manage users and approvals.",
     image: "/projects/rentpro.webp",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe", "Better Auth", "shadcn/ui"],
+    tags: ["Next.js", "TypeScript", "Node.js", "Express.js", "MongoDB", "Stripe", "Better Auth", "Tailwind CSS"],
     live: "https://equipment-rental-platform-seven.vercel.app",
     github: "https://github.com/Tonoy-Mazumder/equipment-rental-platform",
   },
