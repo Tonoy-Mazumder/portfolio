@@ -3,6 +3,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { FiMonitor, FiServer, FiLayers, FiLayout, FiPackage, FiLock, FiExternalLink } from "react-icons/fi";
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiNodedotjs, SiExpress, SiMongodb, SiStripe, SiGit, SiVercel, SiGithub } from "react-icons/si";
+import { FaGraduationCap } from "react-icons/fa";
 import Reveal from "./Reveal";
 
 // scroll-mt keeps each heading clear of the fixed navbar when you click a nav link
@@ -254,6 +255,98 @@ export function Skills() {
             </div>
           </Reveal>
         ))}
+      </div>
+    </section>
+  );
+}
+
+const journey = [
+  {
+    stage: "Frontend",
+    title: "Interfaces with React & Next.js",
+    desc: "Grew into building responsive interfaces with React, Next.js, TypeScript and Tailwind CSS.",
+    dot: "bg-violet-400 ring-violet-500/20",
+  },
+  {
+    stage: "Backend",
+    title: "APIs with Node.js & MongoDB",
+    desc: "Expanded to the backend with Node.js, Express, MongoDB and Better Auth.",
+    dot: "bg-cyan-400 ring-cyan-500/20",
+  },
+  {
+    stage: "Full-stack",
+    title: "4 live projects",
+    desc: "Built and deployed four projects, combining frontend interfaces with backend services where needed.",
+    dot: "bg-violet-400 ring-violet-500/20",
+  },
+  {
+    stage: "2027",
+    title: "Expected graduation",
+    desc: "Completing the diploma and looking for my first entry-level role.",
+    dot: "bg-cyan-400 ring-cyan-500/20",
+  },
+];
+
+export function Education() {
+  return (
+    <section id="education" className={shell}>
+      <Reveal>
+        <h2 className={title}>My <span className="glow-text">education</span></h2>
+      </Reveal>
+      <div className="grid gap-6 lg:grid-cols-5 lg:gap-8">
+        <Reveal delay={0.1} className="lg:col-span-2">
+          <motion.article
+            whileHover={{ y: -6 }}
+            transition={{ type: "spring", stiffness: 280, damping: 24 }}
+            className="h-full rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md transition-colors hover:border-violet-500/60 sm:p-6"
+          >
+            <div className="flex items-start justify-between gap-3">
+              <span className="inline-flex rounded-xl bg-violet-500/20 p-3 text-violet-300">
+                <FaGraduationCap size={24} aria-hidden="true" />
+              </span>
+              <span className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-medium text-cyan-300">
+                Expected 2027
+              </span>
+            </div>
+            <h3 className="mt-5 text-xl font-semibold leading-snug">
+              Diploma in Computer Science and Technology
+            </h3>
+            <p className="mt-2 text-sm text-white/70 sm:text-base">Cumilla Polytechnic Institute</p>
+            <p className="mt-3 text-sm leading-relaxed text-white/60">
+              Studying Computer Technology while spending most of my time building with React,
+              Next.js, TypeScript and Node.js.
+            </p>
+            <p className="mt-5 flex items-center gap-2 text-xs uppercase tracking-widest text-cyan-300">
+              <span className="h-2 w-2 rounded-full bg-cyan-400" aria-hidden="true" />
+              In progress
+            </p>
+          </motion.article>
+        </Reveal>
+
+        <div className="lg:col-span-3">
+          <Reveal>
+            <p className="mb-5 text-sm uppercase tracking-widest text-cyan-300">Learning journey</p>
+          </Reveal>
+          <ol className="relative space-y-5 border-l border-white/10 pl-6 sm:space-y-6 sm:pl-8">
+            {journey.map((step, i) => (
+              <li key={step.stage} className="relative">
+                <Reveal delay={0.1 + i * 0.1}>
+                  <span
+                    aria-hidden="true"
+                    className={`absolute top-5 -left-6 h-3 w-3 -translate-x-1/2 rounded-full ring-4 sm:-left-8 ${step.dot}`}
+                  />
+                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-md transition-colors hover:border-violet-500/60 sm:p-5">
+                    <p className="text-xs font-medium uppercase tracking-widest text-violet-300">
+                      {step.stage}
+                    </p>
+                    <h4 className="mt-1.5 font-semibold">{step.title}</h4>
+                    <p className="mt-1.5 text-sm leading-relaxed text-white/60">{step.desc}</p>
+                  </div>
+                </Reveal>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </section>
   );

@@ -3,7 +3,7 @@ import Hero from "./components/Hero";
 import SceneLoader from "./components/SceneLoader";
 import Loader from "./components/Loader";
 import Cursor from "./components/Cursor";
-import { About, Projects, Skills, Contact } from "./components/Sections";
+import { About, Projects, Skills, Education, Contact } from "./components/Sections";
 
 export default function Home() {
   return (
@@ -17,6 +17,7 @@ export default function Home() {
         <About />
         <Projects />
         <Skills />
+        <Education />
         <Contact />
       </main>
     </>
