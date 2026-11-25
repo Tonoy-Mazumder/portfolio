@@ -39,7 +39,7 @@ export default function Hero() {
             View Projects
           </a>
           <a
-            href="/Tonoy-Mazumder_CV.pdf" download
+            href="/Tonoy_Mazumder_CV.pdf" download
             className="rounded-full border border-white/20 px-5 py-3 transition hover:bg-white/10 sm:px-6"
           >
             Download CV
