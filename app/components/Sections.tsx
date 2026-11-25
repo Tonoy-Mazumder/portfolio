@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { FiMonitor, FiServer, FiLayers, FiLayout, FiPackage, FiLock } from "react-icons/fi";
-import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiNodedotjs, SiExpress, SiMongodb, SiStripe, SiGit, SiVercel } from "react-icons/si";
+import { FiMonitor, FiServer, FiLayers, FiLayout, FiPackage, FiLock, FiExternalLink } from "react-icons/fi";
+import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiNodedotjs, SiExpress, SiMongodb, SiStripe, SiGit, SiVercel, SiGithub } from "react-icons/si";
 import Reveal from "./Reveal";
 
 // scroll-mt keeps each heading clear of the fixed navbar when you click a nav link
@@ -134,34 +134,54 @@ export function Projects() {
       <div className="grid gap-5 md:grid-cols-2 md:gap-6">
         {projects.map((p, i) => (
           <Reveal key={p.name} delay={(i % 2) * 0.15}>
-            <motion.div
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md transition-colors hover:border-violet-500/60 sm:p-6"
+            <motion.article
+              whileHover={{ y: -6 }}
+              transition={{ type: "spring", stiffness: 280, damping: 24 }}
+              className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md transition-colors hover:border-violet-500/60"
             >
-              <Image
-                src={p.image}
-                alt={`Screenshot of the ${p.name} project homepage`}
-                width={1440}
-                height={900}
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="mb-4 aspect-video w-full rounded-xl object-cover"
-              />
-              <h3 className="text-xl font-semibold">{p.name}</h3>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-white/60">{p.desc}</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {p.tags.map((t) => (
-                  <span key={t} className="rounded-full bg-violet-500/20 px-3 py-1 text-xs text-violet-300">{t}</span>
-                ))}
+              <div className="relative overflow-hidden">
+                <Image
+                  src={p.image}
+                  alt={`Screenshot of the ${p.name} project homepage`}
+                  width={1440}
+                  height={900}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="aspect-video w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/50 via-black/0 to-black/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </div>
-              <div className="mt-5 flex flex-wrap gap-3 text-sm">
-                <a href={p.live} target="_blank" rel="noreferrer" className="rounded-full bg-violet-600 px-4 py-2 transition hover:bg-violet-500">
-                  Live ↗
-                </a>
-                <a href={p.github} target="_blank" rel="noreferrer" className="rounded-full border border-white/20 px-4 py-2 transition hover:bg-white/10">
-                  GitHub
-                </a>
+              <div className="flex flex-1 flex-col p-5 sm:p-6">
+                <h3 className="text-xl font-semibold">{p.name}</h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-white/60">{p.desc}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {p.tags.map((t) => (
+                    <span key={t} className="rounded-full border border-violet-500/25 bg-violet-500/15 px-3 py-1 text-xs text-violet-300">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <div className="mt-5 flex flex-wrap gap-3">
+                  <a
+                    href={p.live}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full bg-linear-to-r from-violet-600 to-cyan-500 px-5 py-2.5 text-sm font-medium text-white shadow-lg shadow-violet-500/20 transition hover:from-violet-500 hover:to-cyan-400 focus-visible:ring-2 focus-visible:ring-cyan-300/80 focus-visible:outline-none"
+                  >
+                    Live Demo
+                    <FiExternalLink size={14} aria-hidden="true" />
+                  </a>
+                  <a
+                    href={p.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-5 py-2.5 text-sm font-medium backdrop-blur-md transition hover:border-cyan-400/50 hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-cyan-300/80 focus-visible:outline-none"
+                  >
+                    <SiGithub size={15} aria-hidden="true" />
+                    GitHub
+                  </a>
+                </div>
               </div>
-            </motion.div>
+            </motion.article>
           </Reveal>
         ))}
       </div>
