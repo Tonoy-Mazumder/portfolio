@@ -1,12 +1,39 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { FiMonitor, FiServer, FiLayers, FiLayout, FiPackage, FiLock } from "react-icons/fi";
+import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiNodedotjs, SiExpress, SiMongodb, SiStripe, SiGit, SiVercel } from "react-icons/si";
 import Reveal from "./Reveal";
 
 // scroll-mt keeps each heading clear of the fixed navbar when you click a nav link
 const shell = "mx-auto max-w-5xl scroll-mt-16 px-5 py-20 sm:px-8 md:py-28";
 const title = "mb-8 text-3xl font-bold md:mb-10 md:text-4xl";
 const GITHUB = "https://github.com/Tonoy-Mazumder";
+
+const facts = [
+  { value: "4", label: "Live projects" },
+  { value: "Full Stack", label: "React to MongoDB" },
+  { value: "2027", label: "Diploma graduate" },
+  { value: "Open", label: "Entry-level roles" },
+];
+
+const services = [
+  {
+    icon: FiMonitor,
+    title: "Frontend",
+    desc: "Fast, responsive interfaces with React, Next.js and Tailwind.",
+  },
+  {
+    icon: FiServer,
+    title: "Backend",
+    desc: "APIs and databases with Node.js, Express and MongoDB.",
+  },
+  {
+    icon: FiLayers,
+    title: "Full-Stack Apps",
+    desc: "Auth, payments and dashboards, shipped live on Vercel.",
+  },
+];
 
 export function About() {
   return (
@@ -21,6 +48,44 @@ export function About() {
           interface, building the API, and shipping it live. Right now I&apos;m looking for my first
           entry-level role, where I can learn from a great team and bring real energy to the work.
         </p>
+      </Reveal>
+
+      <Reveal delay={0.1}>
+        <div className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 md:mt-10 md:grid-cols-4">
+          {facts.map((f) => (
+            <div
+              key={f.label}
+              className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-md sm:p-5"
+            >
+              <p className="text-lg font-bold text-violet-300 sm:text-xl">{f.value}</p>
+              <p className="mt-1 text-xs leading-snug text-white/60 sm:text-sm">{f.label}</p>
+            </div>
+          ))}
+        </div>
+      </Reveal>
+
+      <Reveal delay={0.15}>
+        <p className="mb-4 mt-10 text-sm uppercase tracking-widest text-cyan-300 md:mb-5 md:mt-14">
+          What I do
+        </p>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {services.map((s) => {
+            const Icon = s.icon;
+            return (
+              <motion.div
+                key={s.title}
+                whileHover={{ y: -6 }}
+                className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md transition-colors hover:border-violet-500/60"
+              >
+                <span className="inline-flex rounded-xl bg-violet-500/20 p-2.5 text-violet-300">
+                  <Icon size={22} aria-hidden="true" />
+                </span>
+                <h3 className="mt-4 font-semibold">{s.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-white/60">{s.desc}</p>
+              </motion.div>
+            );
+          })}
+        </div>
       </Reveal>
     </section>
   );
@@ -105,35 +170,69 @@ export function Projects() {
 }
 
 const skills = [
-  { group: "Frontend", items: ["React.js", "Next.js", "TypeScript", "Tailwind CSS", "HeroUI", "shadcn/ui"] },
-  { group: "Backend", items: ["Node.js", "Express.js", "MongoDB", "Better Auth", "Stripe"] },
-  { group: "Tools", items: ["Git & GitHub", "Vercel"] },
+  {
+    group: "Frontend",
+    cols: "grid-cols-2 sm:grid-cols-3 lg:grid-cols-6",
+    items: [
+      { name: "React.js", icon: SiReact },
+      { name: "Next.js", icon: SiNextdotjs },
+      { name: "TypeScript", icon: SiTypescript },
+      { name: "Tailwind CSS", icon: SiTailwindcss },
+      { name: "HeroUI", icon: FiLayout },
+      { name: "shadcn/ui", icon: FiPackage },
+    ],
+  },
+  {
+    group: "Backend",
+    cols: "grid-cols-2 sm:grid-cols-3 lg:grid-cols-5",
+    items: [
+      { name: "Node.js", icon: SiNodedotjs },
+      { name: "Express.js", icon: SiExpress },
+      { name: "MongoDB", icon: SiMongodb },
+      { name: "Better Auth", icon: FiLock },
+      { name: "Stripe", icon: SiStripe },
+    ],
+  },
+  {
+    group: "Tools",
+    cols: "grid-cols-2 sm:grid-cols-3 lg:grid-cols-6",
+    items: [
+      { name: "Git & GitHub", icon: SiGit },
+      { name: "Vercel", icon: SiVercel },
+    ],
+  },
 ];
 
 export function Skills() {
   return (
     <section id="skills" className={shell}>
       <Reveal><h2 className={title}>My <span className="glow-text">skills</span></h2></Reveal>
-      <div className="space-y-8">
-        {skills.map((g) => (
-          <div key={g.group}>
-            <p className="mb-3 text-sm uppercase tracking-widest text-cyan-300">{g.group}</p>
-            <div className="flex flex-wrap gap-2.5 sm:gap-3">
-              {g.items.map((s, i) => (
-                <motion.span
-                  key={s}
-                  initial={{ opacity: 0, scale: 0.6 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05, type: "spring" }}
-                  whileHover={{ scale: 1.12, rotate: -2 }}
-                  className="cursor-default rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm backdrop-blur-md sm:px-5"
-                >
-                  {s}
-                </motion.span>
-              ))}
+      <div className="space-y-8 md:space-y-10">
+        {skills.map((g, gi) => (
+          <Reveal key={g.group} delay={gi * 0.1}>
+            <p className="mb-4 text-sm uppercase tracking-widest text-cyan-300">{g.group}</p>
+            <div className={`grid gap-3 sm:gap-4 ${g.cols}`}>
+              {g.items.map((s, i) => {
+                const Icon = s.icon;
+                return (
+                  <motion.div
+                    key={s.name}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{ duration: 0.45, delay: i * 0.05 }}
+                    whileHover={{ y: -5 }}
+                    className="group flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-3 py-5 text-center backdrop-blur-md transition-colors hover:border-violet-500/60"
+                  >
+                    <span className="rounded-xl bg-violet-500/20 p-2.5 text-violet-300 transition-colors group-hover:bg-cyan-500/15 group-hover:text-cyan-300">
+                      <Icon size={24} aria-hidden="true" />
+                    </span>
+                    <span className="text-sm leading-snug text-white/70">{s.name}</span>
+                  </motion.div>
+                );
+              })}
             </div>
-          </div>
+          </Reveal>
         ))}
       </div>
     </section>

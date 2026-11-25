@@ -157,15 +157,14 @@ type Item = { p: V3; s: number } & (
 );
 
 const ITEMS: Item[] = [
-  { k: "glyph", text: "</>", color: "#00ffa3", p: [-4.2, 1.0, -2], s: 1.2 },
-  { k: "pad", p: [4.4, -0.8, -3], s: 0.95 },
+  { k: "glyph", text: "</>", color: "#00ffa3", p: [-5.2, 2.0, -2], s: 1.2 },
   { k: "dice", color: "#22d3ee", p: [-4.5, -4, -2], s: 1.0 },
   { k: "glyph", text: "{ }", color: "#a78bfa", p: [4.4, -5.5, -2], s: 1.2 },
   { k: "alien", p: [-4.3, -7.5, -3], s: 1.0 },
   { k: "glyph", text: "01", color: "#22d3ee", p: [4.2, -9.5, -2], s: 1.2 },
   { k: "glyph", text: "=>", color: "#ff2e97", p: [-4.3, -11.5, -2], s: 1.2 },
   { k: "dice", color: "#ff2e97", p: [4.4, -12.5, -3], s: 1.0 },
-  { k: "glyph", text: "GG", color: "#00ffa3", p: [0, -15.5, -4], s: 2.2 },
+
 ];
 
 function Placed({ item, mobile }: { item: Item; mobile: boolean }) {
