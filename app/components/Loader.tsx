@@ -47,7 +47,7 @@ export default function Loader() {
     let n = progress.current;
     let t: ReturnType<typeof setTimeout>;
     const id = setInterval(() => {
-      n = Math.min(100, n + 4 + Math.floor(Math.random() * 4));
+   n = Math.min(100, n + 8 + Math.floor(Math.random() * 5));
       progress.current = n;
       setCount(n);
       if (n >= 100) {
@@ -58,7 +58,7 @@ export default function Loader() {
           setShow(false);
         }, 250);
       }
-    }, 40);
+    }, 30);
 
     return () => {
       clearInterval(id);

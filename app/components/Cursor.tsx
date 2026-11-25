@@ -19,7 +19,11 @@ export default function Cursor() {
       y.set(e.clientY);
     };
     const over = (e: MouseEvent) => {
-      setHover(!!(e.target as HTMLElement).closest("a, button"));
+      const target = e.target;
+
+      if (target instanceof Element) {
+        setHover(!!target.closest("a, button"));
+      }
     };
     window.addEventListener("mousemove", move);
     window.addEventListener("mouseover", over);
