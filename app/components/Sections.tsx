@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { FiMonitor, FiServer, FiLayers, FiLayout, FiPackage, FiLock, FiExternalLink } from "react-icons/fi";
+import { FiMonitor, FiServer, FiLayers, FiLayout, FiPackage, FiLock, FiExternalLink, FiMail, FiArrowUpRight } from "react-icons/fi";
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiNodedotjs, SiExpress, SiMongodb, SiStripe, SiGit, SiVercel, SiGithub } from "react-icons/si";
-import { FaGraduationCap } from "react-icons/fa";
+import { FaGraduationCap, FaFacebookF } from "react-icons/fa";
 import Reveal from "./Reveal";
 
 // scroll-mt keeps each heading clear of the fixed navbar when you click a nav link
@@ -352,28 +352,78 @@ export function Education() {
   );
 }
 
-const links = [
-  { label: "Email", href: "mailto:mazumdertonoy582@gmail.com" },
-  { label: "GitHub", href: GITHUB },
-  { label: "Facebook", href: "https://www.facebook.com/tonoy.mazumder.10" },
+const EMAIL = "mazumdertonoy582@gmail.com";
+
+const socialLinks = [
+  { label: "GitHub", href: GITHUB, icon: SiGithub, accent: "hover:border-violet-400/50 hover:text-violet-300" },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/tonoy.mazumder.10",
+    icon: FaFacebookF,
+    accent: "hover:border-cyan-400/50 hover:text-cyan-300",
+  },
 ];
 
 export function Contact() {
   return (
     <section id="contact" className={`${shell} text-center`}>
       <Reveal>
+        <p className="mb-3 text-sm uppercase tracking-widest text-cyan-300">Get in touch</p>
         <h2 className={title}>Let&apos;s <span className="glow-text">work together</span></h2>
-        <p className="mb-8 text-white/60">Open for entry-level Full Stack roles.</p>
-        <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
-          {links.map((l) => (
-            <a
-              key={l.label} href={l.href} target="_blank" rel="noreferrer"
-              className="rounded-full border border-white/20 bg-white/5 px-6 py-3 font-medium backdrop-blur-md transition hover:scale-105 hover:bg-violet-600 sm:px-8 sm:py-4"
-            >
-              {l.label}
-            </a>
-          ))}
+        <p className="mx-auto max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
+          Open for entry-level Full Stack roles. Have a project or an opportunity in mind?
+          I&apos;d love to hear from you.
+        </p>
+      </Reveal>
+
+      <Reveal delay={0.1}>
+        <motion.a
+          href={`mailto:${EMAIL}`}
+          whileHover={{ y: -6 }}
+          transition={{ type: "spring", stiffness: 280, damping: 24 }}
+          className="group mx-auto mt-8 flex max-w-2xl flex-col items-center rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-colors hover:border-violet-500/60 focus-visible:ring-2 focus-visible:ring-cyan-300/80 focus-visible:outline-none sm:flex-row sm:gap-5 sm:p-7 sm:text-left"
+        >
+          <span className="inline-flex shrink-0 rounded-2xl bg-violet-500/20 p-3.5 text-violet-300 transition-colors group-hover:bg-cyan-500/15 group-hover:text-cyan-300">
+            <FiMail size={24} aria-hidden="true" />
+          </span>
+          <span className="mt-4 min-w-0 flex-1 sm:mt-0">
+            <span className="block text-xs font-medium uppercase tracking-widest text-cyan-300 sm:text-sm">
+              Email me
+            </span>
+            <span className="mt-1.5 block break-words text-base font-semibold sm:text-lg md:text-xl">
+              {EMAIL}
+            </span>
+            <span className="mt-1.5 block text-sm text-white/60">Send me a message any time.</span>
+          </span>
+          <FiArrowUpRight
+            size={22}
+            aria-hidden="true"
+            className="hidden shrink-0 text-white/40 transition group-hover:text-violet-300 sm:block"
+          />
+        </motion.a>
+      </Reveal>
+
+      <Reveal delay={0.2}>
+        <div className="mx-auto mt-6 flex max-w-2xl flex-wrap justify-center gap-3 sm:gap-4">
+          {socialLinks.map((l) => {
+            const Icon = l.icon;
+            return (
+              <a
+                key={l.label}
+                href={l.href}
+                target="_blank"
+                rel="noreferrer"
+                className={`inline-flex items-center gap-2.5 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-medium text-white/70 backdrop-blur-md transition focus-visible:ring-2 focus-visible:ring-cyan-300/80 focus-visible:outline-none sm:px-7 sm:text-base ${l.accent}`}
+              >
+                <Icon size={18} aria-hidden="true" />
+                {l.label}
+              </a>
+            );
+          })}
         </div>
+      </Reveal>
+
+      <Reveal delay={0.25}>
         <p className="mt-12 text-sm text-white/40 sm:mt-16">© 2026 Tonoy Mazumder</p>
       </Reveal>
     </section>
